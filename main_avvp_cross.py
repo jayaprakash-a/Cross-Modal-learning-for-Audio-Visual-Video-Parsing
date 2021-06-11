@@ -4,7 +4,7 @@ import torch.nn as nn
 from torch.utils.data import DataLoader, Dataset
 import numpy as np
 import random
-from model import *
+from model.model import *
 from torch import optim
 from tqdm import tqdm
 import pandas as pd
@@ -255,14 +255,8 @@ def train(args):
             indi_vid_embed = vid_embed[:, index, :].unsqueeze(1)
             indi_aud_embed = aud_embed[:, index, :].unsqueeze(1)
             
-            # Cross Modal Loss
-            if epoch%2==0:
-                vid_ground = cos(indi_vid_embed, aud_embed)
-                aud_ground = cos(indi_aud_embed, vid_embed)
-            # Uni Modal Loss
-            else:
-                vid_ground = cos(indi_vid_embed, vid_embed)
-                aud_ground = cos(indi_aud_embed, aud_embed)
+            vid_ground = cos(indi_vid_embed, aud_embed)
+            aud_ground = cos(indi_aud_embed, vid_embed)
 
             gt = labels[:, index]
             
@@ -313,15 +307,7 @@ def train(args):
                     loss = loss_vid.mean() + loss_aud.mean()
 
 
-                    # Uni Modal Loss
-                    vid_ground = cos(indi_vid_embed, vid_embed)
-                    aud_ground = cos(indi_aud_embed, aud_embed)
-                    gt = torch.zeros(cur_batch, 10).to(args.device)
-                    gt[:, idx] = 1
-                    loss_vid = torch.where(gt==1, (0.7-vid_ground).clip(min=0), (vid_ground-0.7).clip(min=0))
-                    loss_aud = torch.where(gt==1, (0.7-aud_ground).clip(min=0), (aud_ground-0.7).clip(min=0))
-                    loss += loss_vid.mean() + loss_aud.mean()
-                    epoch_loss += loss
+                    
             
             print(epoch+1, "Epoch AVG Val Loss:", epoch_loss/(len(val_loader)*40))
 
