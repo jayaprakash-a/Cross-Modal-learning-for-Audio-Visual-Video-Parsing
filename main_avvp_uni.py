@@ -8,7 +8,7 @@ from model.model import *
 from torch import optim
 from tqdm import tqdm
 import pandas as pd
-from eval_metrics import segment_level, event_level
+from model.eval_metrics import segment_level, event_level
 import argparse
 from pathlib import Path
 
