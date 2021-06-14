@@ -208,7 +208,7 @@ def eval(model, val_loader, set, rgb_pos_feat, audio_pos_feat, r2p1d_pos_feat, a
     return avg_type
 
 def train(args):
-    f = open(args.audioset_dir+'AudioSet_gt.json',)
+    f = open(args.gt_file)
     gt = json.load(f)
     vids = list(gt.keys())
     random.shuffle(vids)
@@ -407,6 +407,7 @@ def main():
     parser.add_argument('--seed', type=int, default=42, metavar='S', help='random seed (default: 1)')
     parser.add_argument("--model_save_dir", type=str, default='../checkpoint/', help="model save dir")
     parser.add_argument('--device', type=str, default='cuda:0', help='gpu device number')
+    parser.add_argument('--gt_file', type=str, default='./', help='Ground truth for AVG file')
     args = parser.parse_args()
 
     torch.manual_seed(args.seed)

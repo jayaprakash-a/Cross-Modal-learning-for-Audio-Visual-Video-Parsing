@@ -40,7 +40,7 @@ To obtain the ground truth for Audio visual grounding task. Please follow the fo
 
 ```bash
 conda activate $env_name
-python compute_gt.py --video_dir $PATH_TO_VIDEO_FEATS -audio_feats $PATH_TO_AUDIO_FEATS -gt_file $FILENAME_OF_COMPUTED_GT
+python compute_gt.py --video_dir $PATH_TO_VIDEO_FEATS -audio_feats $PATH_TO_AUDIO_FEATS --gt_file $FILENAME_OF_COMPUTED_GT
 ```
 
 
@@ -62,15 +62,15 @@ python main_avvp_adv_skip.py --mode train --video_dir $PATH_TO_VIDEO_FEATS --aud
 ```
 5. Training the pre-training network end-to-end with uni-modal grounding objective
 ```bash
-python main_avvp_uni.py --mode train --video_dir $PATH_TO_VIDEO_FEATS --audio_dir $PATH_TO_AUDIO_FEATS -gt_file $FILENAME_OF_COMPUTED_GT
+python main_avvp_uni.py --mode train --video_dir $PATH_TO_VIDEO_FEATS --audio_dir $PATH_TO_AUDIO_FEATS --gt_file $FILENAME_OF_COMPUTED_GT
 ```
 6. Training the pre-training network end-to-end with cross-modal grounding objective
 ```bash
-python main_avvp_cross.py --mode train --video_dir $PATH_TO_VIDEO_FEATS --audio_dir $PATH_TO_AUDIO_FEATS -gt_file $FILENAME_OF_COMPUTED_GT
+python main_avvp_cross.py --mode train --video_dir $PATH_TO_VIDEO_FEATS --audio_dir $PATH_TO_AUDIO_FEATS --gt_file $FILENAME_OF_COMPUTED_GT
 ```
 7. Training the pre-training network end-to-end with multi-modal grounding objective
 ```bash
-python main_avvp_multi.py --mode train --video_dir $PATH_TO_VIDEO_FEATS --audio_dir $PATH_TO_AUDIO_FEATS -gt_file $FILENAME_OF_COMPUTED_GT
+python main_avvp_multi.py --mode train --video_dir $PATH_TO_VIDEO_FEATS --audio_dir $PATH_TO_AUDIO_FEATS --gt_file $FILENAME_OF_COMPUTED_GT
 ```
 
 
